@@ -10,8 +10,16 @@
     <version>1.0</version>
     <packaging>jar</packaging>
 
+    <!-- ✅ Java 21 -->
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
     <dependencies>
-        <!-- Tomcat Embedded -->
+
+        <!-- Embedded Tomcat -->
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-core</artifactId>
@@ -24,19 +32,33 @@
             <artifactId>jakarta.servlet-api</artifactId>
             <version>4.0.4</version>
         </dependency>
+
     </dependencies>
 
     <build>
         <plugins>
-            <!-- Plugin to run main class -->
+
+            <!-- Java Compiler Plugin -->
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>3.1.0</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+            </plugin>
+
+            <!-- Make JAR Executable -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
                 <configuration>
-                    <mainClass>com.example.HelloServlet</mainClass>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.example.HelloServlet</mainClass>
+                        </manifest>
+                    </archive>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 
